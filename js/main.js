@@ -1,5 +1,5 @@
 var dsnv = new DanhSachNhanVien();
-
+var validation = new Validation();
 getLocalStorage();
 
 function getELE(id) {
@@ -16,22 +16,72 @@ document.getElementById("btnThemNV").onclick = function themNhanVien() {
   var chucVu = getELE("chucvu").value;
   var gioLam = getELE("gioLam").value;
 
-  var nv = new NhanVien(
-    taiKhoan,
-    ten,
-    email,
-    pass,
-    ngayLam,
-    Number(luongCoBan),
-    chucVu,
-    Number(gioLam)
-  );
+  var isValid = true;
+  isValid &=
+    validation.checkEmpty(
+      taiKhoan,
+      "tbTKNV",
+      "Tên tài khoản không được để trống"
+    ) &&
+    validation.checkAcc(
+      taiKhoan,
+      "tbTKNV",
+      "Tên tài khoản không được trùng",
+      dsnv.mangNV
+    );
 
-  nv.tongLuong();
-  nv.xepLoai();
-  dsnv.them(nv);
-  hienThiTable(dsnv.mangNV);
-  setLocalStorage(dsnv.mangNV);
+  isValid &=
+    validation.checkEmpty(ten, "tbTen", "Tên nhân viên không được để trống") &&
+    validation.checkName(ten, "tbTen", "Tên nhân viên chỉ chứa kí tự chữ");
+
+  isValid &=
+    validation.checkEmpty(email, "tbEmail", "Email không được để trống") &&
+    validation.checkEmail(email, "tbEmail", "Email không đúng định dạng");
+
+  isValid &=
+    validation.checkEmpty(pass, "tbMatKhau", "Mật khẩu không được để trống") &&
+    validation.checkPass(
+      pass,
+      "tbMatKhau",
+      "Mật khẩu phải chứa 6-10 kí tự, ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt"
+    );
+
+  isValid &=
+    validation.checkEmpty(ngayLam, "tbNgay", "Ngày làm không được để trống") &&
+    validation.checkDay(ngayLam, "tbNgay", "Ngày làm không đúng định dạng");
+
+  isValid &=
+    validation.checkEmpty(
+      luongCoBan,
+      "tbLuongCB",
+      "Lương không được để trống"
+    ) &&
+    validation.checkLuong(luongCoBan, "tbLuongCB", "Lương từ 1tr đến 20tr");
+
+  isValid &= validation.checkSelect("chucvu", "tbChucVu", "Xin Chọn chức vụ");
+
+  isValid &=
+    validation.checkEmpty(gioLam, "tbGiolam", "Giờ làm không được để trống") &&
+    validation.checkTime(gioLam, "tbGiolam", "Giờ làm từ 80 đến 200");
+
+  if (isValid) {
+    var nv = new NhanVien(
+      taiKhoan,
+      ten,
+      email,
+      pass,
+      ngayLam,
+      Number(luongCoBan),
+      chucVu,
+      Number(gioLam)
+    );
+
+    nv.tongLuong();
+    nv.xepLoai();
+    dsnv.them(nv);
+    hienThiTable(dsnv.mangNV);
+    setLocalStorage(dsnv.mangNV);
+  }
 };
 
 function hienThiTable(mang) {
@@ -104,24 +154,71 @@ getELE("btnCapNhat").onclick = function capNhatNhanVien() {
   var chucVu = getELE("chucvu").value;
   var gioLam = getELE("gioLam").value;
 
-  var nv = new NhanVien(
-    taiKhoan,
-    ten,
-    email,
-    pass,
-    ngayLam,
-    Number(luongCoBan),
-    chucVu,
-    Number(gioLam)
-  );
-  nv.tongLuong();
-  nv.xepLoai();
-  dsnv.capNhat(nv);
-  hienThiTable(dsnv.mangNV);
-  setLocalStorage(dsnv.mangNV);
+  var isValid = true;
+  // isValid &= validation.checkEmpty(taiKhoan,'tbTKNV','Tên tài khoản không được để trống') && validation.checkAcc(taiKhoan,'tbTKNV','Tên tài khoản không được trùng',dsnv.mangNV)
+
+  isValid &=
+    validation.checkEmpty(ten, "tbTen", "Tên nhân viên không được để trống") &&
+    validation.checkName(ten, "tbTen", "Tên nhân viên chỉ chứa kí tự chữ");
+
+  isValid &=
+    validation.checkEmpty(email, "tbEmail", "Email không được để trống") &&
+    validation.checkEmail(email, "tbEmail", "Email không đúng định dạng");
+
+  isValid &=
+    validation.checkEmpty(pass, "tbMatKhau", "Mật khẩu không được để trống") &&
+    validation.checkPass(
+      pass,
+      "tbMatKhau",
+      "Mật khẩu phải chứa 6-10 kí tự, ít nhất 1 ký tự số, 1 ký tự in hoa, 1 ký tự đặc biệt"
+    );
+
+  isValid &=
+    validation.checkEmpty(ngayLam, "tbNgay", "Ngày làm không được để trống") &&
+    validation.checkDay(ngayLam, "tbNgay", "Ngày làm không đúng định dạng");
+
+  isValid &=
+    validation.checkEmpty(
+      luongCoBan,
+      "tbLuongCB",
+      "Lương không được để trống"
+    ) &&
+    validation.checkLuong(luongCoBan, "tbLuongCB", "Lương từ 1tr đến 20tr");
+
+  isValid &= validation.checkSelect("chucvu", "tbChucVu", "Xin Chọn chức vụ");
+
+  isValid &=
+    validation.checkEmpty(gioLam, "tbGiolam", "Giờ làm không được để trống") &&
+    validation.checkTime(gioLam, "tbGiolam", "Giờ làm từ 80 đến 200");
+  if (isValid) {
+    var nv = new NhanVien(
+      taiKhoan,
+      ten,
+      email,
+      pass,
+      ngayLam,
+      Number(luongCoBan),
+      chucVu,
+      Number(gioLam)
+    );
+    nv.tongLuong();
+    nv.xepLoai();
+    dsnv.capNhat(nv);
+    hienThiTable(dsnv.mangNV);
+    setLocalStorage(dsnv.mangNV);
+  }
 };
 
-function resetForm(){
-    getELE("formQLNV").reset()
-    getELE("tknv").disabled = false;
-  }
+function resetForm() {
+  getELE("formQLNV").reset();
+  getELE("tknv").disabled = false;
+}
+function searchChucVuNV(){
+  var keyword = getELE('searchName').value.trim();
+  var mangTK = [];
+  mangTK = dsnv.searchChucvu(keyword);
+  hienThiTable(mangTK);
+}
+getELE('btnTimNV').addEventListener('click',searchChucVuNV);
+
+// getELE('btnTimNV').addEventListener('onchange',searchChucVuNV);

@@ -20,3 +20,13 @@
 .myCardHeader, .myCardFooter{
 	background-color: transparent;       
 }
+#btnTimNV{
+  cursor: pointer;
+}
+#btnTimNV:hover{
+  background-color: #d4d7da;
+    border: 1px solid #d4d7da;
+}
+#btnTimNV:focus{
+  outline: none;
+}
