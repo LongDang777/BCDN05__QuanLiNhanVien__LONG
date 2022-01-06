@@ -7,6 +7,7 @@ function getELE(id) {
 }
 // taiKhoan, ten, email, pass, ngayLam, luongCoBan, chucVu, gioLam
 document.getElementById("btnThemNV").onclick = function themNhanVien() {
+  getELE("btnCapNhat").style.display = "none";
   var taiKhoan = getELE("tknv").value;
   var ten = getELE("name").value;
   var email = getELE("email").value;
@@ -81,9 +82,20 @@ document.getElementById("btnThemNV").onclick = function themNhanVien() {
     dsnv.them(nv);
     hienThiTable(dsnv.mangNV);
     setLocalStorage(dsnv.mangNV);
+    
   }
 };
 
+function closeForm() {
+  getELE("tbTKNV").innerHTML = "";
+  getELE("tbTen").innerHTML = "";
+  getELE("tbEmail").innerHTML = "";
+  getELE("tbMatKhau").innerHTML = "";
+  getELE("tbNgay").innerHTML = "";
+  getELE("tbLuongCB").innerHTML = "";
+  getELE("tbChucVu").innerHTML = "";
+  getELE("tbGiolam").innerHTML = "";
+}
 function hienThiTable(mang) {
   var content = "";
   mang.map(function (nv, index) {
@@ -123,11 +135,22 @@ function xoaNV(id) {
 }
 
 function xemNV(id) {
+  getELE("btnCapNhat").style.display = "block";
+  getELE("tbTKNV").innerHTML = "";
+  getELE("tbTen").innerHTML = "";
+  getELE("tbEmail").innerHTML = "";
+  getELE("tbMatKhau").innerHTML = "";
+  getELE("tbNgay").innerHTML = "";
+  getELE("tbLuongCB").innerHTML = "";
+  getELE("tbChucVu").innerHTML = "";
+  getELE("tbGiolam").innerHTML = "";
+
   var viTri = dsnv.timViTri(id);
- 
+
   if (viTri != -1) {
     var nv = dsnv.mangNV[viTri];
     console.log(nv);
+    getELE("btnThemNV").style.display = "none";
     getELE("tknv").value = nv.taiKhoanNV;
     getELE("tknv").disabled = true;
 
@@ -209,15 +232,18 @@ getELE("btnCapNhat").onclick = function capNhatNhanVien() {
 };
 
 function resetForm() {
+  getELE("btnThemNV").style.display = "block";
+  getELE("btnCapNhat").style.display = "none";
+
   getELE("formQLNV").reset();
   getELE("tknv").disabled = false;
 }
-function searchChucVuNV(){
-  var keyword = getELE('searchName').value.trim();
+function searchChucVuNV() {
+  var keyword = getELE("searchName").value.trim();
   var mangTK = [];
   mangTK = dsnv.searchChucvu(keyword);
   hienThiTable(mangTK);
 }
-getELE('btnTimNV').addEventListener('click',searchChucVuNV);
+getELE("btnTimNV").addEventListener("click", searchChucVuNV);
 
-getELE('searchName').addEventListener('keyup',searchChucVuNV);
+getELE("searchName").addEventListener("keyup", searchChucVuNV);
