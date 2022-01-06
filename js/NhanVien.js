@@ -8,10 +8,10 @@ function NhanVien(taiKhoan, ten, email, pass, ngayLam, luongCoBan, chucVu, gioLa
     this.chucvuNV   = chucVu;
     this.giolamNV   = gioLam;
     this.tongLuong  = 0;
-    this.loai     = '';
+    
 
-    this.tongLuong = function(tongLuong){
-        if(this.chucvuNV == 'Sếp'){
+    this.tongLuong = function(){
+        if(this.chucvuNV == 'Giám đốc'){
             this.tongLuong = this.luongCB * 3; 
         }else if(this.chucvuNV == 'Trưởng phòng'){
             this.tongLuong = this.luongCB * 2; 
@@ -22,15 +22,15 @@ function NhanVien(taiKhoan, ten, email, pass, ngayLam, luongCoBan, chucVu, gioLa
         }
     }
 
-    this.xepLoai = function(loai){
+    this.xepLoai = function(){
         if(this.giolamNV >= 192){
-            this.loai = 'Nhân viên xuất sắc';
+            this.loai = 'Xuất sắc';
         }else if(this.giolamNV >= 176){
-            this.loai = 'Nhân viên giỏi';
+            this.loai = 'Giỏi';
         }else if(this.giolamNV >= 160){
-            this.loai =  'Nhân viên khá';
+            this.loai =  'Khá';
         }else if(this.giolamNV < 160){
-            this.loai =  'Nhân viên trung bình';
+            this.loai =  'Trung bình';
         }else{
             this.loai =  'Không xếp Loại được nhân viên!';
         }

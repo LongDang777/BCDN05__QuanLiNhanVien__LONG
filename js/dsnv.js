@@ -34,7 +34,7 @@ function DanhSachNhanVien() {
     var mangTK = [];
     var keywordLower = keyword.toLowerCase();
     this.mangNV.map(function (nv) {
-      var chucVuLower = nv.chucvuNV.toLowerCase();
+      var chucVuLower = nv.loai.toLowerCase();
       var indexChucVu = chucVuLower.indexOf(keywordLower);
       if (indexChucVu > -1) {
         mangTK.push(nv);

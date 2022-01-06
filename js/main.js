@@ -88,14 +88,14 @@ function hienThiTable(mang) {
   var content = "";
   mang.map(function (nv, index) {
     var tr = `<tr>
-            <td>${nv.taiKhoanNV}</td>
-            <td>${nv.tenNV}</td>
-            <td>${nv.emailNV}</td>
-            <td>${nv.ngayLamNV}</td>
-            <td>${nv.chucvuNV}</td>
-            <td>${nv.tongLuong}</td>
-            <td>${nv.loai}</td>
-            <td>
+            <td style='vertical-align: middle'>${nv.taiKhoanNV}</td>
+            <td style='vertical-align: middle'>${nv.tenNV}</td>
+            <td style='vertical-align: middle'>${nv.emailNV}</td>
+            <td style='vertical-align: middle'>${nv.ngayLamNV}</td>
+            <td style='vertical-align: middle'>${nv.chucvuNV}</td>
+            <td style='vertical-align: middle'>${nv.tongLuong}</td>
+            <td style='vertical-align: middle'>${nv.loai}</td>
+            <td style='vertical-align: middle'>
                 <button class = 'btn btn-danger' onclick = "xoaNV('${nv.taiKhoanNV}')">Xoá</button>
                 <button class = 'btn btn-info'type = 'button' data-toggle ='modal'  data-target = #myModal onclick = "xemNV('${nv.taiKhoanNV}')">Xem</button>
             </td>
@@ -124,8 +124,7 @@ function xoaNV(id) {
 
 function xemNV(id) {
   var viTri = dsnv.timViTri(id);
-  console.table(viTri);
-
+ 
   if (viTri != -1) {
     var nv = dsnv.mangNV[viTri];
     console.log(nv);
@@ -221,4 +220,4 @@ function searchChucVuNV(){
 }
 getELE('btnTimNV').addEventListener('click',searchChucVuNV);
 
-// getELE('btnTimNV').addEventListener('onchange',searchChucVuNV);
+getELE('searchName').addEventListener('keyup',searchChucVuNV);
