@@ -82,7 +82,6 @@ document.getElementById("btnThemNV").onclick = function themNhanVien() {
     dsnv.them(nv);
     hienThiTable(dsnv.mangNV);
     setLocalStorage(dsnv.mangNV);
-    
   }
 };
 
@@ -136,14 +135,7 @@ function xoaNV(id) {
 
 function xemNV(id) {
   getELE("btnCapNhat").style.display = "block";
-  getELE("tbTKNV").innerHTML = "";
-  getELE("tbTen").innerHTML = "";
-  getELE("tbEmail").innerHTML = "";
-  getELE("tbMatKhau").innerHTML = "";
-  getELE("tbNgay").innerHTML = "";
-  getELE("tbLuongCB").innerHTML = "";
-  getELE("tbChucVu").innerHTML = "";
-  getELE("tbGiolam").innerHTML = "";
+  closeForm();
 
   var viTri = dsnv.timViTri(id);
 
@@ -238,12 +230,12 @@ function resetForm() {
   getELE("formQLNV").reset();
   getELE("tknv").disabled = false;
 }
-function searchChucVuNV() {
+function searchLoaiNV() {
   var keyword = getELE("searchName").value.trim();
   var mangTK = [];
-  mangTK = dsnv.searchChucvu(keyword);
+  mangTK = dsnv.searchLoai(keyword);
   hienThiTable(mangTK);
 }
-getELE("btnTimNV").addEventListener("click", searchChucVuNV);
+getELE("btnTimNV").addEventListener("click", searchLoaiNV);
 
-getELE("searchName").addEventListener("keyup", searchChucVuNV);
+getELE("searchName").addEventListener("keyup", searchLoaiNV);

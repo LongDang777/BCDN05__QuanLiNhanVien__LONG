@@ -30,13 +30,13 @@ function DanhSachNhanVien() {
       console.log("Không tìm thấy nhân viên để cập nhật");
     }
   };
-  this.searchChucvu = function (keyword) {
+  this.searchLoai = function (keyword) {
     var mangTK = [];
     var keywordLower = keyword.toLowerCase();
     this.mangNV.map(function (nv) {
-      var chucVuLower = nv.loai.toLowerCase();
-      var indexChucVu = chucVuLower.indexOf(keywordLower);
-      if (indexChucVu > -1) {
+      var loaiLower = nv.loai.toLowerCase();
+      var indexLoai = loaiLower.indexOf(keywordLower);
+      if (indexLoai > -1) {
         mangTK.push(nv);
       }
     });
